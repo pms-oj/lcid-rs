@@ -66,7 +66,7 @@ pub enum NameLookupError {
 /// A known ANSI code page. Some languages can be encoded using one of these
 /// code pages. This enum has a [`u32`] representation, and so can be converted
 /// to the numeric code page value if needed.
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Hash, PartialEq, Eq)]
 #[repr(u32)]
 pub enum AnsiCodePage {
     /// windows-874, Thai (Windows)
@@ -107,7 +107,7 @@ impl From<AnsiCodePage> for u32 {
 
 /// A language's identifiers and information. Lookups from numeric or named
 /// identifiers return a reference to statically defined `LanguageId`.
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Hash, Eq, PartialEq)]
 pub struct LanguageId {
     /// A unique name that identifies the language (IETF language tag).
     pub name: &'static str,
